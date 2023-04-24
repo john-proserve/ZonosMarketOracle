@@ -1,0 +1,10 @@
+# Dependency directories
+node_modules/
+
+# IDE and editor folders and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.log
