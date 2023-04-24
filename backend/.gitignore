@@ -8,3 +8,6 @@ node_modules/
 *.swo
 *.swn
 *.log
+
+# Build files
+.env
