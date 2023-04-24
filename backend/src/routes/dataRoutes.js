@@ -7,6 +7,7 @@ const router = express.Router();
 
 // Mount the parseData route handler at /api/data/parseData
 router.post('/parseData', dataController.parseData);
+router.post('/chatData', dataController.chatData);
 
 // Export the router module
 module.exports = router;
