@@ -1,10 +1,10 @@
+// Load environment variables from .env file
+require('dotenv').config();
+
 // Require external modules
 const express = require('express');
 const bodyParser = require('body-parser');
 const dataRoutes = require('./src/routes/dataRoutes');
-
-// Load environment variables from .env file
-require('dotenv').config();
 
 // Define constants
 const PORT = process.env.PORT || 3000;
