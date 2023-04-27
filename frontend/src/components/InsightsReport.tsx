@@ -9,6 +9,10 @@ import { Spacer } from "./Spacer";
 import { Label } from "./Label";
 import { motion } from "framer-motion";
 import { InsightCard } from "./InsightCard";
+import { Button } from "@zonos/amino/components/button/Button";
+import { ChevronLeftIcon } from "@zonos/amino/icons/ChevronLeftIcon";
+import Link from "next/link";
+import { SageMessage } from "./SageMessage";
 
 const VWrapper = styled(Wrapper)`
   flex-direction: column;
@@ -20,14 +24,12 @@ export const InsightsReport = () => {
       <AppHeader />
       <VWrapper>
         <VStack>
-          <FlexRow>
-            <SageAvatar />
-            <Spacer size={16} />
-            <span>
-              Here are some insights and recomendations based on the data you
-              provided:
-            </span>
-          </FlexRow>
+          <Link href="/new-report">
+            <Button intent="text" icon={<ChevronLeftIcon />}>
+              Start over
+            </Button>
+          </Link>
+          <SageMessage message="Here are some insights are recomendations based on the data you provided:" />
           <motion.div
             animate={{ opacity: 1, y: 0, scale: 1 }}
             initial={{ opacity: 0, y: 50, scale: 0.95 }}

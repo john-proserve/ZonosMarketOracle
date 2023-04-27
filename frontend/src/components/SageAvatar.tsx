@@ -4,6 +4,8 @@ import Image from "next/image";
 const StyledAvatar = styled.div`
   width: 32px;
   height: 32px;
+  min-width: 32px;
+  min-height: 32px;
   border-radius: 3px;
   background: var(--amino-gray-1300);
   display: flex;
