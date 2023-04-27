@@ -3,8 +3,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Spacer } from "./Spacer";
 import { MinusCircleDuotoneIcon } from "@zonos/amino/icons/MinusCircleDuotoneIcon";
+import { motion, useAnimation } from "framer-motion";
 
-const TagWrapper = styled.div`
+const TagWrapper = styled(motion.div)`
   display: flex;
   flex-direction: row;
   border-radius: 50px;
@@ -20,13 +21,10 @@ const TagWrapper = styled.div`
 
   svg {
     opacity: 0.8;
-    color: white;
     height: 18px;
     width: 18px;
-
-    path:first-of-type {
-      fill: var(--amino-gray-900);
-    }
+    fill: var(--amino-gray-900);
+    color: white;
   }
 
   &:hover {
@@ -42,20 +40,50 @@ const TagWrapper = styled.div`
     color: #fff;
 
     &:hover {
-        opacity: .8;
+      opacity: 0.8;
     }
 
     svg {
+      fill: white;
       color: var(--amino-blue-600);
-      opacity: 1;
-
-      path:first-of-type {
-        fill: #fff;
-        opacity: .8;
-      }
     }
   }
 `;
+
+const MinusCircle = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <line x1="8" y1="12" x2="16" y2="12" />
+  </svg>
+);
+
+const PlusCircle = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="8" x2="12" y2="16" />
+    <line x1="8" y1="12" x2="16" y2="12" />
+  </svg>
+);
 
 export const Tag = ({
   label,
@@ -67,15 +95,36 @@ export const Tag = ({
   onChange: (e: any) => void;
 }) => {
   const [active, setActive] = useState<boolean>(false);
+  const control = useAnimation();
 
   const handleToggleActive = () => {
     onChange(!active);
     setActive(!active);
+    control
+      .start({
+        scale: 1.05,
+        transition: { duration: 0.15 },
+      })
+      .then(() => {
+        control.start({
+          scale: 1,
+          transition: { duration: 0.15 },
+        });
+      });
   };
 
   return (
-    <TagWrapper className={active ? "active" : ""} onClick={handleToggleActive}>
-      {active ? <MinusCircleDuotoneIcon /> : <PlusCircleDuotoneIcon />}
+    <TagWrapper
+      className={active ? "active" : ""}
+      onClick={handleToggleActive}
+      animate={control}
+    >
+      <motion.div
+        animate={{ rotate: active ? 45 : 0 }}
+        transition={{ duration: 0.2 }}
+      >
+        <PlusCircle />
+      </motion.div>
       <Spacer size={5} />
       {label}
     </TagWrapper>

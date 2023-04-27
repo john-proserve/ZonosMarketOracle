@@ -3,6 +3,8 @@ import { Card } from "./Card";
 import { Label } from "./Label";
 import { ArrowSwapIcon } from "@zonos/amino/icons/ArrowSwapIcon";
 import { BigLabel } from "./BigLabel";
+import { StarsIcon } from "@zonos/amino/icons/StarsIcon";
+import { Spacer } from "./Spacer";
 
 const NoPaddingCard = styled(Card)`
   padding: 0;
@@ -90,7 +92,11 @@ export const InsightCard = ({
       </Icon>
       <Solution>
         <div>
-          <Label>Suggested improvement</Label>
+          <Label>
+            <StarsIcon />
+            Suggested improvement
+          </Label>
+          <Spacer size={5} />
           <span>{suggestion}</span>
         </div>
       </Solution>

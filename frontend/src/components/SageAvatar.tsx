@@ -18,7 +18,7 @@ const StyledAvatar = styled.div`
       transform: translateY(0);
     }
     to {
-      transform: translateY(-2px);
+      transform: translateY(3px);
     }
   }
 `;

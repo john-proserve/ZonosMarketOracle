@@ -29,10 +29,10 @@ export const InsightsReport = () => {
               Start over
             </Button>
           </Link>
-          <SageMessage message="Here are some insights are recomendations based on the data you provided:" />
+          <SageMessage message="Here are some insights are recomendations based on the data you provided. Keep in mind that these are AI generated and may have errors. Please double check my work before sending anything to a customer!" />
           <motion.div
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            initial={{ opacity: 0, y: 50, scale: 0.99 }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
           >
             <Card>
@@ -80,7 +80,7 @@ export const InsightsReport = () => {
           </motion.div>
           <motion.div
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            initial={{ opacity: 0, y: 50, scale: 0.98 }}
+            initial={{ opacity: 0, y: 50, scale: 0.99 }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1], delay: 0.25 }}
           >
             <InsightCard
@@ -91,7 +91,7 @@ export const InsightsReport = () => {
           </motion.div>
           <motion.div
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            initial={{ opacity: 0, y: 50, scale: 0.98 }}
+            initial={{ opacity: 0, y: 50, scale: 0.99 }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1], delay: 0.3 }}
           >
             <InsightCard
@@ -102,7 +102,7 @@ export const InsightsReport = () => {
           </motion.div>
           <motion.div
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            initial={{ opacity: 0, y: 50, scale: 0.98 }}
+            initial={{ opacity: 0, y: 50, scale: 0.99 }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1], delay: 0.35 }}
           >
             <InsightCard

@@ -36,6 +36,10 @@ const SubmitWrapper = styled.div`
 export const NewReportForm = () => {
   const [storeName, setStoreName] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
+  const [employeeSize, setEmployeeSize] = useState<string>("");
+  const [aov, setAov] = useState<string>("");
+  const [monthlyIntlOrders, setMonthlyIntlOrders] = useState<string>("");
+  const [costPerEmployee, setCostPerEmployee] = useState<string>("");
 
   // tags
   const [hasDDP, setHasDDP] = useState<boolean>(false);
@@ -57,29 +61,16 @@ export const NewReportForm = () => {
       <AppHeader />
       <VWrapper>
         <VStack>
-          <SageMessage message="Hi, I'm SAGE — your automated global trade analyst. I can help you find ways for Zonos to help online stores. Enter as much information as you can about the store you're looking at and I'll generate a report for you with problem analysis and actionable suggestions." />
+          <SageMessage message="Hi, I'm SAGE - your automated global trade analyst. I can help you find ways for Zonos to help online stores. Enter as much information as you can about the store you're looking at and I'll generate a report for you with problem analysis and actionable suggestions." />
           <VStack>
             <Card>
               <Label>What is your store called?</Label>
               <span>I need a name to call your store by in my report.</span>
               <Spacer size={10} />
               <Input
-                placeholder="Store name"
+                label="Store name"
                 onChange={(e) => setStoreName(e.target.value)}
                 value={storeName}
-              />
-            </Card>
-            <Card>
-              <Label>Provide some context about your store</Label>
-              <span>
-                Type up any notes you might have no this store. It's OK if its
-                messy!
-              </span>
-              <Spacer size={10} />
-              <Input
-                placeholder="Add any freeform notes here"
-                onChange={(e) => setNotes(e.target.value)}
-                value={notes}
               />
             </Card>
             <Card>
@@ -133,9 +124,67 @@ export const NewReportForm = () => {
               </Tags>
             </Card>
             <Card>
+              <Label>Provide some context about your store</Label>
+              <span>
+                Type up any notes you might have no this store. It's OK if its
+                messy!
+              </span>
+              <Spacer size={10} />
+              <Input
+                label="Add any freeform notes here"
+                onChange={(e) => setNotes(e.target.value)}
+                value={notes}
+              />
+            </Card>
+            <Card>
+              <Label>Business size</Label>
+              <span>
+                Knowing how big the business is will help me calculate ROI and
+                other metrics.
+              </span>
+              <Spacer size={10} />
+              <FlexRow>
+                <Input
+                  label="Number of employees"
+                  onChange={(e) => setEmployeeSize(e.target.value)}
+                  value={employeeSize}
+                />
+                <Spacer size={8} />
+                <Input
+                  label="Average cost per employee"
+                  onChange={(e) => setCostPerEmployee(e.target.value)}
+                  value={costPerEmployee}
+                  prefix="USD"
+                />
+              </FlexRow>
+            </Card>
+            <Card>
+              <Label>How much international do they do?</Label>
+              <span>
+                Knowing how much international they already do (if any) will
+                help me calculate my report.
+              </span>
+              <Spacer size={10} />
+              <FlexRow>
+                <Input
+                  label="Average international order value"
+                  onChange={(e) => setAov(e.target.value)}
+                  value={aov}
+                  prefix="USD"
+                />
+                <Spacer size={8} />
+                <Input
+                  label="Average # of monthly international orders"
+                  onChange={(e) => setMonthlyIntlOrders(e.target.value)}
+                  value={monthlyIntlOrders}
+                />
+              </FlexRow>
+            </Card>
+            <Card>
               <Label>Upload your data exports</Label>
               <span>
-                Upload your Shopify and SimilarWeb exports here. I'll use them in my report.
+                Upload your Shopify and SimilarWeb exports here. I'll use them
+                in my report.
               </span>
               <Spacer size={10} />
               <FileUpload

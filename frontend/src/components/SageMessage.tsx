@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { SageAvatar } from "./SageAvatar";
 import { FlexRow } from "./FlexRow";
@@ -9,12 +10,18 @@ const GrayBg = styled.div`
   border-radius: 6px;
 `;
 
-export const SageMessage = ({ message }: { message: string }) => (
-  <GrayBg>
-    <FlexRow>
-      <SageAvatar />
-      <Spacer size={16} />
-      <span>{message}</span>
-    </FlexRow>
-  </GrayBg>
-);
+const TopAligned = styled(FlexRow)`
+  align-items: flex-start;
+`;
+
+export const SageMessage = ({ message }: { message: string }) => {
+  return (
+    <GrayBg>
+      <TopAligned>
+        <SageAvatar />
+        <Spacer size={16} />
+        <span>{message}</span>
+      </TopAligned>
+    </GrayBg>
+  );
+};
