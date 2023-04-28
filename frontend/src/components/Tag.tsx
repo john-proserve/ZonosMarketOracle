@@ -103,12 +103,12 @@ export const Tag = ({
     control
       .start({
         scale: 1.05,
-        transition: { duration: 0.15 },
+        transition: { duration: 0.10 },
       })
       .then(() => {
         control.start({
           scale: 1,
-          transition: { duration: 0.15 },
+          transition: { duration: 0.10 },
         });
       });
   };
