@@ -6,8 +6,7 @@ const dataController = require('../controllers/dataController');
 const router = express.Router();
 
 // Mount the parseData route handler at /api/data/parseData
-router.post('/parseData', dataController.parseData);
-router.post('/chatData', dataController.chatData);
+router.route('/').post(dataController.promptData);
 
 // Export the router module
 module.exports = router;

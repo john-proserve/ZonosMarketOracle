@@ -1,30 +1,38 @@
-// Load environment variables from .env file
-require('dotenv').config();
+require('dotenv').config()
 
-// Require external modules
-const express = require('express');
-const bodyParser = require('body-parser');
-const dataRoutes = require('./src/routes/dataRoutes');
+const express = require('express')
+const app = express()
+const { logger, logEvents } = require('./middleware/logger')
+const errorHandler = require('./middleware/errorHandler')
+const cookieParser = require('cookie-parser')
+const cors = require('cors')
+const corsOptions = require('./config/corsOptions')
+const connectDB = require('./config/dbConn')
+const mongoose = require('mongoose')
+const PORT = process.env.PORT || 3500
 
-// Define constants
-const PORT = process.env.PORT || 3000;
+connectDB()
 
-// Create an instance of an Express application
-const app = express();
+app.use(logger)
 
-// Enable parsing of JSON and URL-encoded data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors(corsOptions))
 
-// Mount the dataRoutes at /api/data
-app.use('/api/data', dataRoutes);
+app.use(express.json())
 
-// Define a route handler for the root URL
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use(cookieParser())
 
-// Start the server and listen for incoming requests
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
+app.use('/openai', require('./routes/dataRoutes'));
+app.use('/prompts', require('./routes/promptRoutes'));
+app.use('/upload', require('./routes/fileRoutes'));
+
+app.use(errorHandler)
+
+mongoose.connection.once('open', () => {
+    console.log('Connected to MongoDB')
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+})
+
+mongoose.connection.on('error', err => {
+    console.log(err)
+    logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'mongoErrLog.log')
+})
