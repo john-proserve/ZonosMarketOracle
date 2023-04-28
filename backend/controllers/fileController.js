@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../uploads');
+    cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
     const ext = path.extname(file.originalname);
@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 const uploadFile = function(req, res) {
   upload.single('file')(req, res, function(err) {
     if (err) {
-      return res.status(400).json({ message: 'Error uploading file' });
+      return res.status(400).json({ message: 'Error uploading file', error: err });
     }
 
     const { filename, mimetype, path, size } = req.file;
