@@ -24,6 +24,7 @@ app.use(cookieParser())
 app.use('/openai', require('./routes/dataRoutes'));
 app.use('/prompts', require('./routes/promptRoutes'));
 app.use('/upload', require('./routes/fileRoutes'));
+app.use('/sage', require('./routes/sageRoutes'));
 
 app.use(errorHandler)
 
