@@ -9,11 +9,16 @@ const promptData = async (req, res) => {
             res.status(400);
             throw new Error('Error parsing prompt');
         }
-        const response = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: prompt,
+        const response = await openai.createChatCompletion({
+            model: "gpt-4",
+            messages: [
+                {
+                    role: "user",
+                    content: prompt
+                }
+            ]
         });
-        const completion = response.data.choices[0].text;
+        const completion = response.data.choices[0].message;
         return res.status(200).json({
             success: true,
             message: completion,
