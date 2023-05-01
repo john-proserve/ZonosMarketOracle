@@ -30,6 +30,7 @@ const upload = multer({ storage: storage });
 const uploadFile = function(req, res) {
   // Use the 'upload' middleware to handle single file uploads
   upload.single('file')(req, res, function(err) {
+    console.log('req.file:', req.file);
     // If there was an error uploading the file, return an error response
     if (err) {
       return res.status(400).json({ message: 'Error uploading file', error: err });
