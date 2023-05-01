@@ -27,16 +27,16 @@ const sagePrompt = async (req, res) => {
     // Format the csv data into a prompt
     const userData = generateReport(data);
     // Add both user prompts together
-    const userMessageComplete = userMessageStart + userData;
+    const userMessageComplete = systemPrompt + userMessageStart + userData;
     // Send the prompt to OpenAI
     try {
         const response = await openai.createChatCompletion({
-            model: "gpt-4",
+            model: "gpt-3.5-turbo",
             messages: [
-                {
-                    role: "system",
-                    content: systemPrompt
-                },
+                // {
+                //     role: "system",
+                //     content: systemPrompt
+                // },
                 {
                     role: "user",
                     content: userMessageComplete
@@ -91,14 +91,22 @@ function generateReport(data) {
             };
         }
 
-        acc[row.country].visitors += parseInt(row.total_visitors);
-        acc[row.country].sessions += parseInt(row.total_sessions);
+        if(row.total_visitors)
+            acc[row.country].visitors += parseInt(row.total_visitors);
+        if(row.total_sessions)
+            acc[row.country].sessions += parseInt(row.total_sessions);
+        if(row.total_pageviews)
         acc[row.country].pageviews += parseInt(row.total_pageviews);
-        acc[row.country].duration += parseInt(row.avg_duration.split(':')[1]);
-        acc[row.country].bounceRate += parseFloat(row.bounce_rate);
-        acc[row.country].carts += parseInt(row.total_carts);
-        acc[row.country].checkouts += parseInt(row.total_checkouts);
-        acc[row.country].conversion += parseFloat(row.total_conversion);
+        if (row.avg_duration)
+            acc[row.country].duration += parseInt(row.avg_duration.split(':')[1]);
+        if(row.bounce_rate)
+            acc[row.country].bounceRate += parseFloat(row.bounce_rate);
+        if(row.total_carts)
+            acc[row.country].carts += parseInt(row.total_carts);
+        if(row.total_checkouts)
+            acc[row.country].checkouts += parseInt(row.total_checkouts);
+        if(row.total_conversion)
+            acc[row.country].conversion += parseFloat(row.total_conversion);
         acc[row.country].count++;
 
         return acc;
